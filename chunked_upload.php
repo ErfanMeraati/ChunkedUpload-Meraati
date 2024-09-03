@@ -27,16 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unlink($chunk);
 
         if ($chunkIndex + 1 === $totalChunks) {
-            echo 'آپلود فایل تکمیل شد.';
+            echo 'File upload completed.';
         } else {
-            echo 'تکه دریافت شد.';
+            echo 'ChunkedFile received.';
         }
     } else {
-        error_log('خطا در دریافت تکه: فایل یافت نشد.');
-        echo 'خطا در دریافت تکه.';
+        error_log('Error getting chunk: file not found.');
+        echo 'file not found.';
     }
 } else {
-    error_log('روش درخواست نامعتبر است.');
-    echo 'روش درخواست نامعتبر است.';
+    error_log('The request method is invalid');
+    echo 'The request method is invalid';
 }
 ?>

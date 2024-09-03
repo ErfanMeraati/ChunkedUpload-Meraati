@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+	document.addEventListener('DOMContentLoaded', () => {
   const dropZone = document.getElementById('dropZone');
   const fileInput = document.getElementById('fileInput');
 
-  // رویداد کلیک برای ناحیه درگ اند دراپ
+
   dropZone.addEventListener('click', () => fileInput.click());
 
-  // مدیریت درگ اند دراپ
+ 
   dropZone.addEventListener('dragover', (event) => {
     event.preventDefault();
     dropZone.classList.add('dragover');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleFiles(files);
   });
 
-  // مدیریت انتخاب فایل از ورودی فایل
+
   fileInput.addEventListener('change', () => {
     const files = fileInput.files;
     handleFiles(files);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function handleFiles(files) {
   if (files.length === 0) {
-    alert('لطفاً یک یا چند فایل برای آپلود انتخاب کنید.');
+    alert('Please select one or more files to upload.');
     return;
   }
 
@@ -46,7 +46,7 @@ function handleFiles(files) {
 }
 
 function createProgressBar(file) {
-  // ایجاد نوار پیشرفت برای هر فایل
+  
   const progressBarsContainer = document.getElementById('progressBarsContainer');
   const fileProgressContainer = document.createElement('div');
   fileProgressContainer.className = 'mb-3';
@@ -72,7 +72,7 @@ function createProgressBar(file) {
 }
 
 async function uploadFile(file) {
-  const chunkSize = 5 * 1024 * 1024; // اندازه هر تکه 5 مگابایت
+  const chunkSize = 5 * 1024 * 1024; 
   const totalChunks = Math.ceil(file.size / chunkSize);
 
   const progressBar = document.getElementById(`progressBar-${file.name}`);
@@ -87,15 +87,15 @@ async function uploadFile(file) {
 
     await uploadChunk(chunk, chunkIndex, totalChunks, file.name);
 
-    // به‌روزرسانی نوار پیشرفت کلی پس از آپلود هر تکه
+  
     const progressPercent = Math.round(((chunkIndex + 1) / totalChunks) * 100);
     progressBar.style.width = `${progressPercent}%`;
 
-    // به‌روزرسانی متن پیشرفت
+    
     progressText.innerText = `Uploading ${file.name}: ${progressPercent}%`;
   }
 
-  console.log(`آپلود فایل ${file.name} تکمیل شد!`);
+  console.log(`upload of the file ${file.name} is completed`);
 }
 
 async function uploadChunk(chunk, chunkIndex, totalChunks, fileName) {
@@ -112,12 +112,12 @@ async function uploadChunk(chunk, chunkIndex, totalChunks, fileName) {
     });
 
     if (!response.ok) {
-      throw new Error('آپلود تکه ناموفق بود: ' + chunkIndex);
+      throw new Error('chunked ' + chunkIndex);
     }
 
-    console.log(`آپلود تکه ${chunkIndex + 1}/${totalChunks} از فایل ${fileName}`);
+    console.log(`chunked file upload ${chunkIndex + 1}/${totalChunks} From ${fileName}`);
 
   } catch (error) {
-    console.error('خطا در آپلود تکه:', error);
+    console.error('Error uploading the chunkedFile', error);
   }
 }
